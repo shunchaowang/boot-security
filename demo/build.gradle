@@ -17,8 +17,6 @@ plugins {
 dependencies {
     implementation project(':browser')
 
-    //implementation 'org.springframework.boot:spring-boot-dependencies:2.1.0.RELEASE'
-
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
 }
