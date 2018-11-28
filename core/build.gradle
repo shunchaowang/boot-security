@@ -22,9 +22,6 @@ dependencyManagement {
 }
 
 dependencies {
-    // the only spring version needed is boot-dependencies, other versions are handled by the plugin
-    //implementation 'org.springframework.boot:spring-boot-dependencies:2.1.0.RELEASE'
-    implementation "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
