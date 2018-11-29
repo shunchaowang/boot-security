@@ -16,6 +16,8 @@ plugins {
 dependencies {
     implementation project(':core')
 
+    implementation('org.springframework.session:spring-session:1.3.4.RELEASE')
+
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
 }

@@ -9,12 +9,13 @@
 plugins {
     // Apply the java plugin to add support for Java
     id 'java'
-
-    // Apply the application plugin to add support for building an application
-    id 'application'
+    id 'org.springframework.boot' version '2.1.0.RELEASE'
+    id "io.spring.dependency-management" version '1.0.6.RELEASE'
 }
 
 dependencies {
+
+    implementation project(':core')
     // This dependency is found on compile classpath of this component and consumers.
     implementation 'com.google.guava:guava:26.0-jre'
 
@@ -23,4 +24,6 @@ dependencies {
 }
 
 // Define the main class for the application
-mainClassName = 'boot.security.app.App'
+bootJar {
+    mainClassName = 'boot.security.app.App'
+}
