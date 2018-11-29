@@ -17,9 +17,13 @@ plugins {
 dependencies {
     implementation project(':browser')
 
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
 }
 
 // Define the main class for the application
 bootJar {
-    mainClassName = 'boot.security.demo.App'
+    mainClassName = 'boot.security.demo.DemoApplication'
 }
