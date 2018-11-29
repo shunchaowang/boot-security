@@ -45,7 +45,5 @@ dependencies {
     runtimeOnly('mysql:mysql-connector-java')
 
     testImplementation('org.springframework.security:spring-security-test')
-    // Use JUnit test framework
-    testImplementation 'junit:junit:4.12'
 }
 
