@@ -2,6 +2,7 @@ package boot.security.demo.web;
 
 import boot.security.demo.model.User;
 import boot.security.demo.model.UserQueryCriteria;
+import com.fasterxml.jackson.annotation.JsonView;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
@@ -20,7 +21,8 @@ public class UserController {
 
   private final Logger logger = LoggerFactory.getLogger(getClass());
 
-  @GetMapping()
+  @GetMapping
+  @JsonView(User.UserSimpleView.class)
 //  public List<User> query(@RequestParam String username) {
   public List<User> query(UserQueryCriteria criteria, Pageable pageable) {
 
@@ -34,6 +36,7 @@ public class UserController {
   }
 
   @GetMapping("/{id:\\d+}")
+  @JsonView(User.UserDetailView.class)
   public User getInfo(@PathVariable String id) {
     User user = new User();
     user.setUsername("tom");
