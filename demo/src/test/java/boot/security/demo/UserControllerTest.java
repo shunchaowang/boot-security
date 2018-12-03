@@ -1,9 +1,11 @@
 package boot.security.demo;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
+import java.util.Date;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -71,5 +73,63 @@ public class UserControllerTest {
     mockMvc
         .perform(MockMvcRequestBuilders.get("/user/a").contentType(MediaType.APPLICATION_JSON_UTF8))
         .andExpect(status().is4xxClientError());
+  }
+
+  @Test
+  public void whenCreateSuccess() throws Exception {
+
+//    Date date = new Date();
+//    System.out.println(date.getTime());
+//    String content =
+//        "{\"username\":\"john\",\"password\":\"password\",\"birthday\":" + date.getTime() + "}";
+    String content = formulateJsonToCreate("password");
+    String result =
+        mockMvc
+            .perform(post("/user").contentType(MediaType.APPLICATION_JSON_UTF8).content(content))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.id").value(1))
+            .andReturn()
+            .getResponse()
+            .getContentAsString();
+
+    System.out.println(result);
+  }
+
+  @Test
+  public void whenCreateWithEmptyPassword() throws Exception {
+
+//    Date date = new Date();
+//    System.out.println(date.getTime());
+//    String content =
+//        "{\"username\":\"john\",\"password\":null,\"birthday\":" + date.getTime() + "}";
+    String content = formulateJsonToCreate(null);
+    String result =
+        mockMvc
+            .perform(post("/user").contentType(MediaType.APPLICATION_JSON_UTF8).content(content))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.id").value(1))
+            .andReturn()
+            .getResponse()
+            .getContentAsString();
+
+    System.out.println(result);
+  }
+
+  private String formulateJsonToCreate(String password) {
+    Date date = new Date();
+    System.out.println(date.getTime());
+    String content =
+        "{\"username\":\"john\",\"password\":null,\"birthday\":" + date.getTime() + "}";
+
+    if (password != null) {
+      content = "{\"username\":\"john\",\"password\":\""
+          + password
+          + "\",\"birthday\":"
+          + date.getTime()
+          + "}";
+    }
+
+    System.out.println(content);
+    return content;
   }
 }

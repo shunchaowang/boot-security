@@ -5,13 +5,17 @@ import boot.security.demo.model.UserQueryCriteria;
 import com.fasterxml.jackson.annotation.JsonView;
 import java.util.ArrayList;
 import java.util.List;
+import javax.validation.Valid;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,7 +27,7 @@ public class UserController {
 
   @GetMapping
   @JsonView(User.UserSimpleView.class)
-//  public List<User> query(@RequestParam String username) {
+  //  public List<User> query(@RequestParam String username) {
   public List<User> query(UserQueryCriteria criteria, Pageable pageable) {
 
     logger.info(ReflectionToStringBuilder.toString(criteria, ToStringStyle.MULTI_LINE_STYLE));
@@ -40,6 +44,18 @@ public class UserController {
   public User getInfo(@PathVariable String id) {
     User user = new User();
     user.setUsername("tom");
+    return user;
+  }
+
+  @PostMapping
+  public User create(@RequestBody @Valid User user, BindingResult errors) {
+
+    if (errors.hasErrors()) {
+      errors.getAllErrors().stream().forEach(error -> System.out.println(error));
+    }
+
+    logger.info(ReflectionToStringBuilder.toString(user, ToStringStyle.MULTI_LINE_STYLE));
+    user.setId("1");
     return user;
   }
 }
