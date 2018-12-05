@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -64,7 +65,14 @@ public class UserController {
   public User update(@RequestBody @Valid User user, BindingResult errors) {
 
     if (errors.hasErrors()) {
-      errors.getAllErrors().stream().forEach(error -> System.out.println(error));
+      errors
+          .getAllErrors()
+          .stream()
+          .forEach(
+              error -> {
+                FieldError fieldError = (FieldError) error;
+                System.out.println(fieldError.getField() + " " + fieldError.getDefaultMessage());
+              });
     }
 
     logger.info(ReflectionToStringBuilder.toString(user, ToStringStyle.MULTI_LINE_STYLE));
