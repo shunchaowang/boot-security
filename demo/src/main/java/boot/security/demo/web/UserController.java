@@ -1,5 +1,6 @@
 package boot.security.demo.web;
 
+import boot.security.demo.UserNotExistException;
 import boot.security.demo.model.User;
 import boot.security.demo.model.UserQueryCriteria;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -45,9 +46,10 @@ public class UserController {
   @GetMapping("/{id:\\d+}")
   @JsonView(User.UserDetailView.class)
   public User getInfo(@PathVariable String id) {
-    User user = new User();
-    user.setUsername("tom");
-    return user;
+    throw new UserNotExistException(id);
+//    User user = new User();
+//    user.setUsername("tom");
+//    return user;
   }
 
   @PostMapping
