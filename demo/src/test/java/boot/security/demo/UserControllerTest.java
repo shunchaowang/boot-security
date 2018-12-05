@@ -1,10 +1,13 @@
 package boot.security.demo;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import org.junit.Before;
 import org.junit.Test;
@@ -78,10 +81,6 @@ public class UserControllerTest {
   @Test
   public void whenCreateSuccess() throws Exception {
 
-//    Date date = new Date();
-//    System.out.println(date.getTime());
-//    String content =
-//        "{\"username\":\"john\",\"password\":\"password\",\"birthday\":" + date.getTime() + "}";
     String content = formulateJsonToCreate("password");
     String result =
         mockMvc
@@ -98,10 +97,6 @@ public class UserControllerTest {
   @Test
   public void whenCreateWithEmptyPassword() throws Exception {
 
-//    Date date = new Date();
-//    System.out.println(date.getTime());
-//    String content =
-//        "{\"username\":\"john\",\"password\":null,\"birthday\":" + date.getTime() + "}";
     String content = formulateJsonToCreate(null);
     String result =
         mockMvc
@@ -131,5 +126,28 @@ public class UserControllerTest {
 
     System.out.println(content);
     return content;
+  }
+
+  @Test
+  public void whenUpdateSuccess() throws Exception {
+
+    Date date = new Date(LocalDateTime.now()
+        .plusYears(1)
+        .atZone(ZoneId.systemDefault())
+        .toInstant()
+        .toEpochMilli());
+    System.out.println(date.getTime());
+    String content =
+        "{\"username\":\"john\",\"password\":\"password\",\"birthday\":" + date.getTime() + "}";
+    String result =
+        mockMvc
+            .perform(put("/user/1").contentType(MediaType.APPLICATION_JSON_UTF8).content(content))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.id").value(1))
+            .andReturn()
+            .getResponse()
+            .getContentAsString();
+
+    System.out.println(result);
   }
 }

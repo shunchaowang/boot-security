@@ -3,6 +3,7 @@ package boot.security.demo.model;
 import com.fasterxml.jackson.annotation.JsonView;
 import java.util.Date;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Past;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,7 @@ public class User {
   private String password;
 
   @JsonView(UserSimpleView.class)
+  @Past
   private Date birthday;
 
   public interface UserSimpleView {};
