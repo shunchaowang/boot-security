@@ -1,6 +1,7 @@
 package boot.security.demo;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -18,7 +19,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 @RunWith(SpringRunner.class)
@@ -39,7 +39,7 @@ public class UserControllerTest {
     String result =
         mockMvc
             .perform(
-                MockMvcRequestBuilders.get("/user")
+                get("/user")
                     .contentType(MediaType.APPLICATION_JSON_UTF8)
                     .param("username", "me")
                     .param("age", "18")
@@ -61,8 +61,7 @@ public class UserControllerTest {
   public void whenGetInfoSuccess() throws Exception {
     String result =
         mockMvc
-            .perform(
-                MockMvcRequestBuilders.get("/user/1").contentType(MediaType.APPLICATION_JSON_UTF8))
+            .perform(get("/user/1").contentType(MediaType.APPLICATION_JSON_UTF8))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.username").value("tom"))
             .andReturn()
@@ -75,7 +74,7 @@ public class UserControllerTest {
   @Test
   public void whenGetInfoFail() throws Exception {
     mockMvc
-        .perform(MockMvcRequestBuilders.get("/user/a").contentType(MediaType.APPLICATION_JSON_UTF8))
+        .perform(get("/user/a").contentType(MediaType.APPLICATION_JSON_UTF8))
         .andExpect(status().is4xxClientError());
   }
 
@@ -118,11 +117,12 @@ public class UserControllerTest {
         "{\"username\":\"john\",\"password\":null,\"birthday\":" + date.getTime() + "}";
 
     if (password != null) {
-      content = "{\"username\":\"john\",\"password\":\""
-          + password
-          + "\",\"birthday\":"
-          + date.getTime()
-          + "}";
+      content =
+          "{\"username\":\"john\",\"password\":\""
+              + password
+              + "\",\"birthday\":"
+              + date.getTime()
+              + "}";
     }
 
     System.out.println(content);
@@ -132,11 +132,13 @@ public class UserControllerTest {
   @Test
   public void whenUpdateSuccess() throws Exception {
 
-    Date date = new Date(LocalDateTime.now()
-        .plusYears(1)
-        .atZone(ZoneId.systemDefault())
-        .toInstant()
-        .toEpochMilli());
+    Date date =
+        new Date(
+            LocalDateTime.now()
+                .plusYears(1)
+                .atZone(ZoneId.systemDefault())
+                .toInstant()
+                .toEpochMilli());
     System.out.println(date.getTime());
     String content =
         "{\"username\":\"john\",\"password\":\"password\",\"birthday\":" + date.getTime() + "}";
