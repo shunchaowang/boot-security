@@ -38,7 +38,6 @@ dependencies {
 
     implementation "org.springframework.boot:spring-boot-configuration-processor"
 
-    compileOnly('org.projectlombok:lombok:1.18.2')
 //    runtimeOnly('mysql:mysql-connector-java')
 
     testImplementation('org.springframework.security:spring-security-test')

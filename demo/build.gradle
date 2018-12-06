@@ -17,12 +17,13 @@ plugins {
 dependencies {
     implementation project(':browser')
 
-    compileOnly('org.projectlombok:lombok:1.18.2')
+    //compileOnly('org.projectlombok:lombok:1.18.2')
 
-    implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation('org.springframework.boot:spring-boot-starter-data-jpa')
     implementation('org.springframework.boot:spring-boot-starter-data-redis')
     implementation('org.springframework.boot:spring-boot-starter-jdbc')
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation('org.springframework.boot:spring-boot-starter-security')
 
     implementation('org.apache.commons:commons-lang3:3.8.1')
     implementation('org.apache.commons:commons-collections4:4.2')
