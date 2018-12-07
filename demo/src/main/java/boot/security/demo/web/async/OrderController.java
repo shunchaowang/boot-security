@@ -23,7 +23,7 @@ public class OrderController {
   }
 
   @GetMapping("/callable/{id:\\d+}")
-  public Callable<String> orderCallable(@PathVariable String id) throws Exception {
+  public Callable<String> orderCallable(@PathVariable String id) {
     logger.info("Main Thread Starts");
 
     Callable<String> result =
@@ -37,32 +37,8 @@ public class OrderController {
           }
         };
 
-    //    Callable<String> processor = new CallableOrderProcessor(id);
-    //    String result = processor.call();
+    // String result = new CallableOrderProcessor(id).call();
     logger.info("Main Thread Returns");
     return result;
   }
-
-    public class CallableOrderProcessor implements Callable<String> {
-
-      private String id;
-
-      public CallableOrderProcessor(String id) {
-        this.id = id;
-      }
-
-      /**
-       * Computes a result, or throws an exception if unable to do so.
-       *
-       * @return computed result
-       * @throws Exception if unable to compute a result
-       */
-      @Override
-      public String call() throws Exception {
-        logger.info("Second Thread Starts");
-        Thread.sleep(1000); // Processing order for 1 sec
-        logger.info("Second Thread Ends");
-        return "Order Processed " + id;
-      }
-    }
 }
