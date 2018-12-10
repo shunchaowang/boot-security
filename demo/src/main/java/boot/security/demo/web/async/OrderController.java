@@ -2,12 +2,12 @@ package boot.security.demo.web.async;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ForkJoinPool;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.async.DeferredResult;
@@ -18,17 +18,20 @@ public class OrderController {
 
   private final Logger logger = LoggerFactory.getLogger(getClass());
 
-  @GetMapping("/{id:\\d+}")
-  public String order(@PathVariable String id) throws InterruptedException {
+  @GetMapping("/sync")
+  public String order() throws InterruptedException {
     logger.info("Main Thread Starts");
+    String id = RandomStringUtils.randomNumeric(8);
     Thread.sleep(1000); // Processing order for 1 sec
     logger.info("Main Thread Returns");
     return "Order Processed " + id;
   }
 
-  @GetMapping("/async-callable/{id:\\d+}")
-  public Callable<String> orderCallable(@PathVariable String id) {
+  @GetMapping("/async-callable")
+  public Callable<String> orderCallable() {
     logger.info("Main Thread Starts");
+
+    String id = RandomStringUtils.randomNumeric(8);
 
     //    Callable<String> result =
     //        new Callable<String>() {
@@ -54,9 +57,11 @@ public class OrderController {
     return result;
   }
 
-  @GetMapping("/async-deferredresult/{id}")
-  public DeferredResult<ResponseEntity<?>> orderDeferredResult(@PathVariable String id) {
+  @GetMapping("/async-deferredresult")
+  public DeferredResult<ResponseEntity<?>> orderDeferredResult() {
     logger.info("Main Thread Starts");
+
+    String id = RandomStringUtils.randomNumeric(8);
 
     DeferredResult<ResponseEntity<?>> result = new DeferredResult<>(5000l); // timeout of 5s
     result.onCompletion(() -> logger.info("DeferredResult Completion Callback"));
