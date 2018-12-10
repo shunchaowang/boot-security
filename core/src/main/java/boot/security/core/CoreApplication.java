@@ -3,7 +3,7 @@
  */
 package boot.security.core;
 
-public class Library {
+public class CoreApplication {
     public boolean someLibraryMethod() {
         return true;
     }
