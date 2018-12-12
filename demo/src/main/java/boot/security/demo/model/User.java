@@ -22,9 +22,9 @@ public class User {
   @Past
   private Date birthday;
 
-    public User() {};
+  public User() {};
 
-    public String getId() {
+  public String getId() {
     return id;
   };
 
@@ -56,7 +56,7 @@ public class User {
     this.birthday = birthday;
   }
 
-public interface UserSimpleView {}
+  public interface UserSimpleView {}
 
-public interface UserDetailView extends UserSimpleView {}
+  public interface UserDetailView extends UserSimpleView {}
 }

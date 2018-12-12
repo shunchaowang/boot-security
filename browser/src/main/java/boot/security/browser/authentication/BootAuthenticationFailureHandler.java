@@ -1,5 +1,7 @@
 package boot.security.browser.authentication;
 
+import boot.security.core.properties.LoginType;
+import boot.security.core.properties.SecurityProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -10,15 +12,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 
 @Component("bootAuthenticationFailureHandler ")
-public class BootAuthenticationFailureHandler implements AuthenticationFailureHandler {
+public class BootAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
   private final Logger logger = LoggerFactory.getLogger(getClass());
 
   @Autowired private ObjectMapper objectMapper;
+
+  @Autowired private SecurityProperties securityProperties;
 
   /**
    * Called when an authentication attempt fails.
@@ -32,10 +36,15 @@ public class BootAuthenticationFailureHandler implements AuthenticationFailureHa
       HttpServletRequest request, HttpServletResponse response, AuthenticationException exception)
       throws IOException, ServletException {
 
-    logger.info("Authentication Failure.");
+    logger.info(
+        "Authentication Failure of LoginType " + securityProperties.getBrowser().getLoginType());
 
-    response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-    response.setContentType("application/json;charset=UTF-8");
-    response.getWriter().write(objectMapper.writeValueAsString(exception));
+    if (LoginType.JSON.equals(securityProperties.getBrowser().getLoginType())) {
+      response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+      response.setContentType("application/json;charset=UTF-8");
+      response.getWriter().write(objectMapper.writeValueAsString(exception));
+    } else {
+      super.onAuthenticationFailure(request, response, exception);
+    }
   }
 }
