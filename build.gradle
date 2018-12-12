@@ -16,7 +16,7 @@ subprojects {
         springBootVersion = '2.1.0.RELEASE'
         springCloudVersion = 'Greenwich.M1'
     }
-    
+
     version = '1.0.0'
 }
 

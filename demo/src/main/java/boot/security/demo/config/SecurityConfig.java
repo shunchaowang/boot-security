@@ -3,8 +3,8 @@ package boot.security.demo.config;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-//@Configuration
-//@EnableWebSecurity
+// @Configuration
+// @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   /**
@@ -19,9 +19,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
    * @param http the {@link HttpSecurity} to modify
    * @throws Exception if an error occurs
    */
-//  @Override
-//  protected void configure(HttpSecurity http) throws Exception {
-//
-////    http.authorizeRequests().antMatchers("/").permitAll();
-//  }
+  //  @Override
+  //  protected void configure(HttpSecurity http) throws Exception {
+  //
+  ////    http.authorizeRequests().antMatchers("/").permitAll();
+  //  }
 }

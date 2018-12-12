@@ -3,6 +3,4 @@
  */
 package boot.security.browser;
 
-public class AppTest {
-
-}
+public class AppTest {}

@@ -3,6 +3,4 @@
  */
 package boot.security.core;
 
-public class LibraryTest {
-
-}
+public class LibraryTest {}

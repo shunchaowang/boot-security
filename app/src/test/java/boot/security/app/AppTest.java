@@ -3,6 +3,4 @@
  */
 package boot.security.app;
 
-public class AppTest {
-
-}
+public class AppTest {}

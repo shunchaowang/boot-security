@@ -4,11 +4,11 @@
 package boot.security.app;
 
 public class AppApplication {
-    public String getGreeting() {
-        return "Hello world.";
-    }
+  public static void main(String[] args) {
+    System.out.println(new AppApplication().getGreeting());
+  }
 
-    public static void main(String[] args) {
-        System.out.println(new AppApplication().getGreeting());
-    }
+  public String getGreeting() {
+    return "Hello world.";
+  }
 }

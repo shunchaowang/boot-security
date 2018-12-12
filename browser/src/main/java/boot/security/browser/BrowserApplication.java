@@ -3,15 +3,18 @@
  */
 package boot.security.browser;
 
+import boot.security.core.CoreApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
+@Import(CoreApplication.class)
 public class BrowserApplication {
-    public String getGreeting() {
-        return "Hello world.";
-    }
+  public static void main(String[] args) {
+    System.out.println(new BrowserApplication().getGreeting());
+  }
 
-    public static void main(String[] args) {
-        System.out.println(new BrowserApplication().getGreeting());
-    }
+  public String getGreeting() {
+    return "Hello world.";
+  }
 }

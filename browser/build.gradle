@@ -27,6 +27,10 @@ dependencies {
     // For compiling against this library use apiElements
 //    apiElements 'org.springframework.boot:spring-boot-starter-web'
 
+    implementation('org.apache.commons:commons-lang3:3.8.1')
+    implementation('org.apache.commons:commons-collections4:4.2')
+    implementation('commons-beanutils:commons-beanutils:1.9.3')
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 //    implementation('org.springframework.session:spring-session:1.3.4.RELEASE')
