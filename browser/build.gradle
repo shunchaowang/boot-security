@@ -24,6 +24,7 @@ dependencies {
 
     implementation('org.springframework.boot:spring-boot-starter-web')
     implementation('org.springframework.boot:spring-boot-starter-security')
+    implementation('org.springframework.session:spring-session-jdbc')
 
 //    implementation('org.springframework.session:spring-session-data-redis')
     // For compiling against this library use apiElements
@@ -32,7 +33,6 @@ dependencies {
     implementation('org.apache.commons:commons-lang3:3.8.1')
     implementation('org.apache.commons:commons-collections4:4.2')
     implementation('commons-beanutils:commons-beanutils:1.9.3')
-    implementation('org.springframework.social:spring-social-core:1.1.6.RELEASE')
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 

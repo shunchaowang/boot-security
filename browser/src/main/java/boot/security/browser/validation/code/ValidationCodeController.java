@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ValidationCodeController {
 
-//  private SessionStrategy sessionStrategy;
+//  private HttpSess
 
   @GetMapping("/code/image")
   public void createCode(HttpServletRequest request, HttpServletResponse response) {
