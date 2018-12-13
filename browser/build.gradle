@@ -9,7 +9,7 @@
 plugins {
     // Apply the java plugin to add support for Java
     id 'java-library'
-    id 'org.springframework.boot' version '2.1.0.RELEASE' apply false
+    id 'org.springframework.boot' version '2.1.1.RELEASE' apply false
     id "io.spring.dependency-management" version '1.0.6.RELEASE'
 }
 
@@ -22,14 +22,17 @@ dependencyManagement {
 dependencies {
     implementation project(':core')
 
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation('org.springframework.boot:spring-boot-starter-web')
     implementation('org.springframework.boot:spring-boot-starter-security')
+
+//    implementation('org.springframework.session:spring-session-data-redis')
     // For compiling against this library use apiElements
 //    apiElements 'org.springframework.boot:spring-boot-starter-web'
 
     implementation('org.apache.commons:commons-lang3:3.8.1')
     implementation('org.apache.commons:commons-collections4:4.2')
     implementation('commons-beanutils:commons-beanutils:1.9.3')
+    implementation('org.springframework.social:spring-social-core:1.1.6.RELEASE')
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 

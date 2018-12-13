@@ -11,7 +11,7 @@ plugins {
     id 'java-library'
     // we only need spring to resolve version, since this is a library, no other tasks needed
     // do not apply, otherwise have to define bootJar
-    id 'org.springframework.boot' version '2.1.0.RELEASE' apply false
+    id 'org.springframework.boot' version '2.1.1.RELEASE' apply false
     id "io.spring.dependency-management" version '1.0.6.RELEASE'
 }
 
