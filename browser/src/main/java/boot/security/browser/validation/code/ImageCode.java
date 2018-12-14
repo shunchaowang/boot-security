@@ -1,9 +1,12 @@
 package boot.security.browser.validation.code;
 
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class ImageCode {
+public class ImageCode implements Serializable {
+
+  private static final long serialVersionUID = 1L;
 
   private BufferedImage image;
 

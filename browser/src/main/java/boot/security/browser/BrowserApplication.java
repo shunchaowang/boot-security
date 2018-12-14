@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
 @Import(CoreApplication.class)
+//@EnableJdbcHttpSession
 public class BrowserApplication {
   public static void main(String[] args) {
     System.out.println(new BrowserApplication().getGreeting());
