@@ -23,7 +23,7 @@ public class ValidationCodeController {
   private static final String SESSION_KEY = "SESSION_KEY_IMAGE_CODE";
 
   @GetMapping(value = "/code/image", produces = "image/jpeg")
-  public void createCode(HttpServletRequest request, HttpServletResponse response) {
+  public void createCodeImage(HttpServletRequest request, HttpServletResponse response) {
     // Generate a ImageCode
     ImageCode imageCode = createImageCode();
     // Store the ImageCode in the session
