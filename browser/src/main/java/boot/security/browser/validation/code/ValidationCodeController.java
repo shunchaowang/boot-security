@@ -20,7 +20,7 @@ public class ValidationCodeController {
 
   private final Logger logger = LoggerFactory.getLogger(getClass());
 
-  private static final String SESSION_KEY = "SESSION_KEY_IMAGE_CODE";
+  public static final String SESSION_KEY = "SESSION_KEY_IMAGE_CODE";
 
   @GetMapping(value = "/code/image", produces = "image/jpeg")
   public void createCodeImage(HttpServletRequest request, HttpServletResponse response) {
