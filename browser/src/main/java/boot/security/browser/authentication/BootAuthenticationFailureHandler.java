@@ -45,8 +45,7 @@ public class BootAuthenticationFailureHandler extends SimpleUrlAuthenticationFai
       response.setContentType("application/json;charset=UTF-8");
       response
           .getWriter()
-          .write(
-              objectMapper.writeValueAsString(new SimpleResponse<>(exception.getMessage())));
+          .write(objectMapper.writeValueAsString(new SimpleResponse<>(exception.getMessage())));
     } else {
       super.onAuthenticationFailure(request, response, exception);
     }

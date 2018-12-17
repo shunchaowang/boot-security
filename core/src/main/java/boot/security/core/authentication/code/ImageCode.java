@@ -1,4 +1,4 @@
-package boot.security.browser.validation.code;
+package boot.security.core.authentication.code;
 
 import java.awt.image.BufferedImage;
 import java.io.Serializable;

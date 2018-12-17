@@ -1,6 +1,5 @@
-package boot.security.browser.validation.code;
+package boot.security.core.authentication.code;
 
-import boot.security.browser.authentication.BootAuthenticationFailureHandler;
 import java.io.IOException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -10,17 +9,15 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-@Component
 public class ValidationCodeFilter extends OncePerRequestFilter {
 
   private final Logger logger = LoggerFactory.getLogger(getClass());
 
-  @Autowired private BootAuthenticationFailureHandler bootAuthenticationFailureHandler;
+  private AuthenticationFailureHandler authenticationFailureHandler;
 
   /**
    * Same contract as for {@code doFilter}, but guaranteed to be just invoked once per request
@@ -39,12 +36,21 @@ public class ValidationCodeFilter extends OncePerRequestFilter {
       try {
         validate(request);
       } catch (ValidationCodeException exception) {
-        bootAuthenticationFailureHandler.onAuthenticationFailure(request, response, exception);
+        authenticationFailureHandler.onAuthenticationFailure(request, response, exception);
         return;
       }
     }
 
     filterChain.doFilter(request, response);
+  }
+
+  public AuthenticationFailureHandler getAuthenticationFailureHandler() {
+    return authenticationFailureHandler;
+  }
+
+  public void setAuthenticationFailureHandler(
+      AuthenticationFailureHandler authenticationFailureHandler) {
+    this.authenticationFailureHandler = authenticationFailureHandler;
   }
 
   private void validate(HttpServletRequest request) throws ValidationCodeException {

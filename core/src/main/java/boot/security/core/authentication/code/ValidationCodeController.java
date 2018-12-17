@@ -1,4 +1,4 @@
-package boot.security.browser.validation.code;
+package boot.security.core.authentication.code;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -18,9 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ValidationCodeController {
 
-  private final Logger logger = LoggerFactory.getLogger(getClass());
-
   public static final String SESSION_KEY = "SESSION_KEY_IMAGE_CODE";
+  private final Logger logger = LoggerFactory.getLogger(getClass());
 
   @GetMapping(value = "/code/image", produces = "image/jpeg")
   public void createCodeImage(HttpServletRequest request, HttpServletResponse response) {
@@ -31,7 +30,7 @@ public class ValidationCodeController {
     HttpSession session = request.getSession();
 
     session.setAttribute(SESSION_KEY, imageCode);
-    logger.info(((ImageCode)session.getAttribute(SESSION_KEY)).getCode());
+    logger.info(((ImageCode) session.getAttribute(SESSION_KEY)).getCode());
     try {
       ImageIO.write(imageCode.getImage(), "JPEG", response.getOutputStream());
       response.getOutputStream().flush();
@@ -95,5 +94,4 @@ public class ValidationCodeController {
 
     return new ImageCode(image, code.toString(), 60);
   }
-
 }

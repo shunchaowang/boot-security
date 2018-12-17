@@ -1,6 +1,6 @@
 package boot.security.browser;
 
-import boot.security.browser.validation.code.ValidationCodeFilter;
+import boot.security.core.authentication.code.ValidationCodeFilter;
 import boot.security.core.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -22,8 +22,6 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Autowired private AuthenticationFailureHandler bootAuthenticationFailureHandler;
 
-  @Autowired private ValidationCodeFilter validationCodeFilter;
-
   @Bean
   public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
@@ -43,6 +41,10 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
    */
   @Override
   protected void configure(HttpSecurity http) throws Exception {
+
+    ValidationCodeFilter validationCodeFilter = new ValidationCodeFilter();
+    validationCodeFilter.setAuthenticationFailureHandler(bootAuthenticationFailureHandler);
+
     http.addFilterBefore(validationCodeFilter, UsernamePasswordAuthenticationFilter.class)
         .formLogin()
         .loginPage("/authentication/require")
