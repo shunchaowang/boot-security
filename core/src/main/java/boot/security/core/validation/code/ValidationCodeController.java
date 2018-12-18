@@ -42,7 +42,7 @@ public class ValidationCodeController {
 
   private ImageCode createImageCode() {
 
-    int width = 90, height = 40, codeCount = 4;
+    int width = 90, height = 40, length = 4;
     int xx = 15, fontHeight = 35, yy = 30;
 
     BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -78,7 +78,7 @@ public class ValidationCodeController {
 
     // generate random color for different number
     int red = 0, green = 0, blue = 0;
-    for (int i = 0; i < codeCount; i++) {
+    for (int i = 0; i < length; i++) {
       String s = String.valueOf(random.nextInt(10));
       red = random.nextInt(255);
       green = random.nextInt(255);
