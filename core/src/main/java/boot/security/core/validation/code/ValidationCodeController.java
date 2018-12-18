@@ -1,5 +1,6 @@
 package boot.security.core.validation.code;
 
+import boot.security.core.properties.SecurityProperties;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,10 +24,12 @@ public class ValidationCodeController {
   public static final String SESSION_KEY = "SESSION_KEY_IMAGE_CODE";
   private final Logger logger = LoggerFactory.getLogger(getClass());
 
+  @Autowired private SecurityProperties securityProperties;
+
   @GetMapping(value = "/code/image", produces = "image/jpeg")
   public void createCodeImage(HttpServletRequest request, HttpServletResponse response) {
     // Generate a ImageCode
-    ImageCode imageCode = createImageCode();
+    ImageCode imageCode = createImageCode(request);
     // Store the ImageCode in the session
     // Response the ImageCode to the client
     HttpSession session = request.getSession();
@@ -40,9 +45,17 @@ public class ValidationCodeController {
     }
   }
 
-  private ImageCode createImageCode() {
+  private ImageCode createImageCode(HttpServletRequest request) {
 
-    int width = 90, height = 40, length = 4;
+    int length = securityProperties.getValidation().getCode().getLength();
+
+    int width =
+        ServletRequestUtils.getIntParameter(
+            request, "width", securityProperties.getValidation().getCode().getWidth());
+    int height =
+        ServletRequestUtils.getIntParameter(
+            request, "height", securityProperties.getValidation().getCode().getHeight());
+
     int xx = 15, fontHeight = 35, yy = 30;
 
     BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
