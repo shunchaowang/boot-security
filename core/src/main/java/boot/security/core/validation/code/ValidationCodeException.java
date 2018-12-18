@@ -1,4 +1,4 @@
-package boot.security.core.authentication.code;
+package boot.security.core.validation.code;
 
 import org.springframework.security.core.AuthenticationException;
 
