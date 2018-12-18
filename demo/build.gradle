@@ -15,6 +15,7 @@ plugins {
 }
 
 dependencies {
+    implementation project(':core')
     implementation project(':browser')
 
     //compileOnly('org.projectlombok:lombok:1.18.2')
