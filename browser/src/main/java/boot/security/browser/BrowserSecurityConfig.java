@@ -1,7 +1,7 @@
 package boot.security.browser;
 
 import boot.security.core.properties.SecurityProperties;
-import boot.security.core.validation.code.ValidationCodeFilter;
+import boot.security.core.validation.code.ImageCodeFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -52,12 +52,12 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
 
-    ValidationCodeFilter validationCodeFilter = new ValidationCodeFilter();
-    validationCodeFilter.setAuthenticationFailureHandler(bootAuthenticationFailureHandler);
-    validationCodeFilter.setSecurityProperties(securityProperties);
-    validationCodeFilter.afterPropertiesSet();
+    ImageCodeFilter imageCodeFilter = new ImageCodeFilter();
+    imageCodeFilter.setAuthenticationFailureHandler(bootAuthenticationFailureHandler);
+    imageCodeFilter.setSecurityProperties(securityProperties);
+    imageCodeFilter.afterPropertiesSet();
 
-    http.addFilterBefore(validationCodeFilter, UsernamePasswordAuthenticationFilter.class)
+    http.addFilterBefore(imageCodeFilter, UsernamePasswordAuthenticationFilter.class)
         .formLogin()
         .loginPage("/authentication/require")
         .loginProcessingUrl("/authentication/form")
@@ -73,7 +73,7 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers(
             "/authentication/require",
             securityProperties.getBrowser().getLoginPage(),
-            "/code/image")
+            "/code/image", "/code/sms")
         .permitAll()
         .anyRequest()
         .authenticated()

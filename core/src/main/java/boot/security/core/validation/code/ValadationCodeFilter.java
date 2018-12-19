@@ -9,19 +9,14 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.util.AntPathMatcher;
-import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-public class ValidationCodeFilter extends OncePerRequestFilter implements InitializingBean {
-
-  private final Logger logger = LoggerFactory.getLogger(getClass());
+public abstract class ValadationCodeFilter extends OncePerRequestFilter
+    implements InitializingBean {
 
   private AuthenticationFailureHandler authenticationFailureHandler;
 
@@ -90,34 +85,9 @@ public class ValidationCodeFilter extends OncePerRequestFilter implements Initia
     this.authenticationFailureHandler = authenticationFailureHandler;
   }
 
-  private void validate(HttpServletRequest request) throws ValidationCodeException {
-
-    HttpSession session = request.getSession();
-    ImageCode validationInSession =
-        (ImageCode) session.getAttribute(ValidationCodeController.SESSION_KEY);
-    ServletWebRequest webRequest = new ServletWebRequest(request);
-    String codeInRequest = webRequest.getParameter("imageCode");
-
-    if (StringUtils.isBlank(codeInRequest)) {
-      throw new ValidationCodeException("Code Not Exist in Request.");
-    }
-
-    if (validationInSession == null) {
-      throw new ValidationCodeException("Code Not Exist in Session.");
-    }
-
-    if (validationInSession.isExpired()) {
-      throw new ValidationCodeException("Code Expired in Session.");
-    }
-
-    if (!StringUtils.equals(validationInSession.getCode(), codeInRequest)) {
-      throw new ValidationCodeException("Code Not Matched.");
-    }
-
-    session.removeAttribute(ValidationCodeController.SESSION_KEY);
-  }
-
   public void setSecurityProperties(SecurityProperties securityProperties) {
     this.securityProperties = securityProperties;
   }
+
+  public abstract void validate(HttpServletRequest request) throws ValidationCodeException;
 }

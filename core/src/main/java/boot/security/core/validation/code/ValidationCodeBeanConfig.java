@@ -18,4 +18,12 @@ public class ValidationCodeBeanConfig {
     ((ImageCodeGenerator) imageCodeGenerator).setSecurityProperties(securityProperties);
     return imageCodeGenerator;
   }
+
+  @Bean
+  @ConditionalOnMissingBean(SmsCodeGenerator.class)
+  public ValidationCodeGenerator<ValidationCode> smsCodeGenerator() {
+    ValidationCodeGenerator<ValidationCode> smsCodeGenerator = new SmsCodeGenerator();
+    ((SmsCodeGenerator) smsCodeGenerator).setSecurityProperties(securityProperties);
+    return smsCodeGenerator;
+  }
 }
