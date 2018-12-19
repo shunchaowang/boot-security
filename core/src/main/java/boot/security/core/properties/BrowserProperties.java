@@ -6,6 +6,16 @@ public class BrowserProperties {
 
   private LoginType loginType = LoginType.JSON;
 
+  private int rememberMeTokenSeconds = 3600;
+
+  public int getRememberMeTokenSeconds() {
+    return rememberMeTokenSeconds;
+  }
+
+  public void setRememberMeTokenSeconds(int rememberMeTokenSeconds) {
+    this.rememberMeTokenSeconds = rememberMeTokenSeconds;
+  }
+
   public String getLoginPage() {
     return loginPage;
   }
