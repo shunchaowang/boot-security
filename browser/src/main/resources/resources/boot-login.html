@@ -25,12 +25,6 @@
       </td>
     </tr>
     <tr>
-      <td>SMS Code</td>
-      <td>
-        <input name="smsCode" type="text">
-      </td>
-    </tr>
-    <tr>
       <td colspan="2"><input name="remember-me" type="checkbox" value="true" />Remember Me</td>
     </tr>
     <tr>
@@ -40,5 +34,27 @@
     </tr>
   </table>
 </form>
+
+<form action="/authentication/mobile" method="post">
+  <table>
+    <tr>
+      <td>Mobile:</td>
+      <td><input name="mobile" type="text" value="1381234567"></td>
+    </tr>
+    <tr>
+      <td>SMS Code</td>
+      <td>
+        <input name="smsCode" type="text">
+        <a href="/code/sms?mobile=1381234567">Send Code</a>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <button type="submit">Login</button>
+      </td>
+    </tr>
+  </table>
+</form>
+
 </body>
 </html>

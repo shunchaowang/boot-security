@@ -1,6 +1,7 @@
-package boot.security.core.validation.code;
+package boot.security.core.validation.image;
 
 import boot.security.core.properties.SecurityProperties;
+import boot.security.core.validation.ValidationCodeGenerator;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -15,14 +16,14 @@ public class ImageCodeGenerator implements ValidationCodeGenerator<ImageCode> {
 
   @Override
   public ImageCode generate(HttpServletRequest request) {
-    int length = securityProperties.getValidation().getCode().getLength();
+    int length = securityProperties.getValidation().getImage().getLength();
 
     int width =
         ServletRequestUtils.getIntParameter(
-            request, "width", securityProperties.getValidation().getCode().getWidth());
+            request, "width", securityProperties.getValidation().getImage().getWidth());
     int height =
         ServletRequestUtils.getIntParameter(
-            request, "height", securityProperties.getValidation().getCode().getHeight());
+            request, "height", securityProperties.getValidation().getImage().getHeight());
 
     int xx = 15, fontHeight = 35, yy = 30;
 
@@ -73,7 +74,8 @@ public class ImageCodeGenerator implements ValidationCodeGenerator<ImageCode> {
 
     graphics.dispose();
 
-    return new ImageCode(image, code.toString(), 60);
+    return new ImageCode(
+        image, code.toString(), securityProperties.getValidation().getImage().getExpiredIn());
   }
 
   public void setSecurityProperties(SecurityProperties securityProperties) {

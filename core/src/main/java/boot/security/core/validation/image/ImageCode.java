@@ -1,5 +1,6 @@
-package boot.security.core.validation.code;
+package boot.security.core.validation.image;
 
+import boot.security.core.validation.ValidationCode;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.time.LocalDateTime;

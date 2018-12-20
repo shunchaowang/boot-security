@@ -1,7 +1,7 @@
 package boot.security.browser;
 
 import boot.security.core.properties.SecurityProperties;
-import boot.security.core.validation.code.ImageCodeFilter;
+import boot.security.core.validation.image.ImageCodeFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

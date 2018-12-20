@@ -2,13 +2,23 @@ package boot.security.core.properties;
 
 public class ValidationCodeProperties {
 
-  private ImageCodeProperties code = new ImageCodeProperties();
+  private ImageCodeProperties image = new ImageCodeProperties();
 
-  public ImageCodeProperties getCode() {
-    return code;
+  private SmsCodeProperties sms = new SmsCodeProperties();
+
+  public SmsCodeProperties getSms() {
+    return sms;
   }
 
-  public void setCode(ImageCodeProperties code) {
-    this.code = code;
+  public void setSms(SmsCodeProperties sms) {
+    this.sms = sms;
+  }
+
+  public ImageCodeProperties getImage() {
+    return image;
+  }
+
+  public void setImage(ImageCodeProperties image) {
+    this.image = image;
   }
 }

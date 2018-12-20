@@ -1,4 +1,4 @@
-package boot.security.core.validation.code;
+package boot.security.core.validation;
 
 import boot.security.core.properties.SecurityProperties;
 import java.io.IOException;
@@ -41,7 +41,7 @@ public abstract class ValadationCodeFilter extends OncePerRequestFilter
     super.afterPropertiesSet();
     String[] configUrls =
         StringUtils.splitByWholeSeparatorPreserveAllTokens(
-            securityProperties.getValidation().getCode().getUrl(), ",");
+            securityProperties.getValidation().getImage().getUrl(), ",");
     for (String configUrl : configUrls) {
       urls.add(configUrl);
     }
@@ -91,7 +91,8 @@ public abstract class ValadationCodeFilter extends OncePerRequestFilter
 
   public abstract void validate(HttpServletRequest request) throws ValidationCodeException;
 
-  protected void validateRequestAndSession(String codeInRequest, ValidationCode validationInSession) {
+  protected void validateRequestAndSession(
+      String codeInRequest, ValidationCode validationInSession) {
     if (StringUtils.isBlank(codeInRequest)) {
       throw new ValidationCodeException("Code Not Exist in Request.");
     }

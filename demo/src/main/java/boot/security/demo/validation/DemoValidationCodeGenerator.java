@@ -1,7 +1,7 @@
 package boot.security.demo.validation;
 
-import boot.security.core.validation.code.ImageCode;
-import boot.security.core.validation.code.ValidationCodeGenerator;
+import boot.security.core.validation.image.ImageCode;
+import boot.security.core.validation.ValidationCodeGenerator;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Component;
 
