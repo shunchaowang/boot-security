@@ -90,4 +90,22 @@ public abstract class ValadationCodeFilter extends OncePerRequestFilter
   }
 
   public abstract void validate(HttpServletRequest request) throws ValidationCodeException;
+
+  protected void validateRequestAndSession(String codeInRequest, ValidationCode validationInSession) {
+    if (StringUtils.isBlank(codeInRequest)) {
+      throw new ValidationCodeException("Code Not Exist in Request.");
+    }
+
+    if (validationInSession == null) {
+      throw new ValidationCodeException("Code Not Exist in Session.");
+    }
+
+    if (validationInSession.isExpired()) {
+      throw new ValidationCodeException("Code Expired in Session.");
+    }
+
+    if (!StringUtils.equals(validationInSession.getCode(), codeInRequest)) {
+      throw new ValidationCodeException("Code Not Matched.");
+    }
+  }
 }

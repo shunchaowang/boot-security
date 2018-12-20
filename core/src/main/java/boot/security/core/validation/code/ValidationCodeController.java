@@ -30,7 +30,7 @@ public class ValidationCodeController {
     HttpSession session = request.getSession();
 
     session.setAttribute(SESSION_KEY_IMAGE_CODE, imageCode);
-    logger.info(((ImageCode) session.getAttribute(SESSION_KEY_IMAGE_CODE)).getCode());
+    logger.info("ImageCode - " + ((ImageCode) session.getAttribute(SESSION_KEY_IMAGE_CODE)).getCode());
     try {
       ImageIO.write(imageCode.getImage(), "JPEG", response.getOutputStream());
       response.getOutputStream().flush();
@@ -49,7 +49,7 @@ public class ValidationCodeController {
     HttpSession session = request.getSession();
 
     session.setAttribute(SESSION_KEY_SMS_CODE, smsCode);
-    logger.info(((ValidationCode) session.getAttribute(SESSION_KEY_SMS_CODE)).getCode());
+    logger.info("SmsCode - " + ((ValidationCode) session.getAttribute(SESSION_KEY_SMS_CODE)).getCode());
     System.out.println("SMS Code: " + smsCode.getCode());
   }
 }
