@@ -3,6 +3,7 @@ package boot.security.core.validation;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ public class ValidationCodeController {
   @GetMapping(value = "/code/{type}")
   public void createCode(
       HttpServletRequest request, HttpServletResponse response, @PathVariable String type) {
+    if (!(StringUtils.equals(type, "sms") || StringUtils.equals(type, "image"))) return;
+
     validationCodeProcessors
         .get(type + ValidationCodeProcessor.class.getSimpleName())
         .create(new ServletWebRequest(request, response));

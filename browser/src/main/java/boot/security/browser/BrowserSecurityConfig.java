@@ -77,7 +77,6 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers(
             "/authentication/require",
             "/code/*",
-            "/favicon.ico",
             securityProperties.getBrowser().getLoginPage())
         .permitAll()
         .anyRequest()
