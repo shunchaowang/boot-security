@@ -2,8 +2,8 @@ package boot.security.core.validation;
 
 import boot.security.core.properties.SecurityProperties;
 import boot.security.core.validation.image.ImageCode;
-import boot.security.core.validation.image.ImageCodeGenerator;
-import boot.security.core.validation.sms.SmsCodeGenerator;
+import boot.security.core.validation.image.ImageValidationCodeGenerator;
+import boot.security.core.validation.sms.SmsValidationCodeGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -17,16 +17,16 @@ public class ValidationCodeBeanConfig {
   @Bean
   @ConditionalOnMissingBean(name = "imageCodeGenerator")
   public ValidationCodeGenerator<ImageCode> imageCodeGenerator() {
-    ValidationCodeGenerator<ImageCode> imageCodeGenerator = new ImageCodeGenerator();
-    ((ImageCodeGenerator) imageCodeGenerator).setSecurityProperties(securityProperties);
+    ValidationCodeGenerator<ImageCode> imageCodeGenerator = new ImageValidationCodeGenerator();
+    ((ImageValidationCodeGenerator) imageCodeGenerator).setSecurityProperties(securityProperties);
     return imageCodeGenerator;
   }
 
   @Bean
-  @ConditionalOnMissingBean(SmsCodeGenerator.class)
+  @ConditionalOnMissingBean(SmsValidationCodeGenerator.class)
   public ValidationCodeGenerator<ValidationCode> smsCodeGenerator() {
-    ValidationCodeGenerator<ValidationCode> smsCodeGenerator = new SmsCodeGenerator();
-    ((SmsCodeGenerator) smsCodeGenerator).setSecurityProperties(securityProperties);
+    ValidationCodeGenerator<ValidationCode> smsCodeGenerator = new SmsValidationCodeGenerator();
+    ((SmsValidationCodeGenerator) smsCodeGenerator).setSecurityProperties(securityProperties);
     return smsCodeGenerator;
   }
 }

@@ -3,15 +3,19 @@ package boot.security.core.validation.sms;
 import boot.security.core.properties.SecurityProperties;
 import boot.security.core.validation.ValidationCode;
 import boot.security.core.validation.ValidationCodeGenerator;
-import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.ServletWebRequest;
 
-public class SmsCodeGenerator implements ValidationCodeGenerator<ValidationCode> {
+@Component("smsValidationCodeGenerator")
+public class SmsValidationCodeGenerator implements ValidationCodeGenerator<ValidationCode> {
 
+  @Autowired
   private SecurityProperties securityProperties;
 
   @Override
-  public ValidationCode generate(HttpServletRequest request) {
+  public ValidationCode generate(ServletWebRequest request) {
 
     int length = securityProperties.getValidation().getSms().getLength();
 

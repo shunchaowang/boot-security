@@ -1,8 +1,8 @@
 package boot.security.core.validation;
 
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.web.context.request.ServletWebRequest;
 
 public interface ValidationCodeGenerator<T extends ValidationCode> {
 
-  T generate(HttpServletRequest request);
+  T generate(ServletWebRequest request);
 }

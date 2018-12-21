@@ -3,7 +3,7 @@ package boot.security.core.validation.sms;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DefaultSmsCodeSender implements SmsCodeSender {
+public class DefaultSmsValidationCodeSender implements SmsValidationCodeSender {
 
   @Override
   public void send(String mobile, String code) {

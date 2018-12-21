@@ -1,7 +1,9 @@
 package boot.security.browser;
 
 import boot.security.core.properties.SecurityProperties;
-import boot.security.core.validation.image.ImageCodeFilter;
+import boot.security.core.validation.ValidationCodeFilter;
+import boot.security.core.validation.ValidationCodeProcessor;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,8 +25,9 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Autowired private AuthenticationFailureHandler bootAuthenticationFailureHandler;
 
-  @Autowired
-  private UserDetailsService myUserDetailsService;
+  @Autowired private UserDetailsService myUserDetailsService;
+
+  @Autowired private Map<String, ValidationCodeProcessor> validationCodeProcessors;
 
   @Bean
   public PasswordEncoder passwordEncoder() {
@@ -52,12 +55,13 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
 
-    ImageCodeFilter imageCodeFilter = new ImageCodeFilter();
-    imageCodeFilter.setAuthenticationFailureHandler(bootAuthenticationFailureHandler);
-    imageCodeFilter.setSecurityProperties(securityProperties);
-    imageCodeFilter.afterPropertiesSet();
+    ValidationCodeFilter validationCodeFilter = new ValidationCodeFilter();
+    validationCodeFilter.setAuthenticationFailureHandler(bootAuthenticationFailureHandler);
+    validationCodeFilter.setSecurityProperties(securityProperties);
+    validationCodeFilter.setValidationCodeProcessors(validationCodeProcessors);
+    validationCodeFilter.afterPropertiesSet();
 
-    http.addFilterBefore(imageCodeFilter, UsernamePasswordAuthenticationFilter.class)
+    http.addFilterBefore(validationCodeFilter, UsernamePasswordAuthenticationFilter.class)
         .formLogin()
         .loginPage("/authentication/require")
         .loginProcessingUrl("/authentication/form")
@@ -66,14 +70,15 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
         .and()
         .rememberMe()
         .userDetailsService(myUserDetailsService)
-//        .tokenRepository(persistentTokenRepository())
-//        .tokenValiditySeconds(securityProperties.getBrowser().getRememberMeTokenSeconds())
+        //        .tokenRepository(persistentTokenRepository())
+        //        .tokenValiditySeconds(securityProperties.getBrowser().getRememberMeTokenSeconds())
         .and()
         .authorizeRequests()
         .antMatchers(
             "/authentication/require",
-            securityProperties.getBrowser().getLoginPage(),
-            "/code/image", "/code/sms")
+            "/code/*",
+            "/favicon.ico",
+            securityProperties.getBrowser().getLoginPage())
         .permitAll()
         .anyRequest()
         .authenticated()

@@ -7,23 +7,27 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.Random;
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.ServletRequestUtils;
+import org.springframework.web.context.request.ServletWebRequest;
 
-public class ImageCodeGenerator implements ValidationCodeGenerator<ImageCode> {
+@Component("imageValidationCodeGenerator")
+public class ImageValidationCodeGenerator implements ValidationCodeGenerator<ImageCode> {
 
+  @Autowired
   private SecurityProperties securityProperties;
 
   @Override
-  public ImageCode generate(HttpServletRequest request) {
+  public ImageCode generate(ServletWebRequest request) {
     int length = securityProperties.getValidation().getImage().getLength();
 
     int width =
         ServletRequestUtils.getIntParameter(
-            request, "width", securityProperties.getValidation().getImage().getWidth());
+            request.getRequest(), "width", securityProperties.getValidation().getImage().getWidth());
     int height =
         ServletRequestUtils.getIntParameter(
-            request, "height", securityProperties.getValidation().getImage().getHeight());
+            request.getRequest(), "height", securityProperties.getValidation().getImage().getHeight());
 
     int xx = 15, fontHeight = 35, yy = 30;
 

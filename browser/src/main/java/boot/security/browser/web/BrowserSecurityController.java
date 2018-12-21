@@ -28,6 +28,7 @@ public class BrowserSecurityController {
   private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
   @Autowired private SecurityProperties securityProperties;
+
   /**
    * Redirect here when authentication is required.
    *
