@@ -1,4 +1,4 @@
-package boot.security.core.support;
+package boot.security.browser.support;
 
 public class SimpleResponse<T> {
 
