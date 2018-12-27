@@ -1,4 +1,4 @@
-package boot.security.browser;
+package boot.security.core;
 
 import boot.security.core.properties.SecurityProperties;
 import boot.security.core.validation.ValidationCodeFilter;

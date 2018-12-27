@@ -1,5 +1,6 @@
 package boot.security.browser;
 
+import boot.security.core.ValidationCodeSecurityConfig;
 import boot.security.core.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

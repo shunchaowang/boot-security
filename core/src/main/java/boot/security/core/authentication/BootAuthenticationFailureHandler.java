@@ -1,6 +1,6 @@
-package boot.security.browser.authentication;
+package boot.security.core.authentication;
 
-import boot.security.browser.support.SimpleResponse;
+import boot.security.core.support.SimpleResponse;
 import boot.security.core.properties.LoginType;
 import boot.security.core.properties.SecurityProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;

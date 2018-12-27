@@ -1,4 +1,4 @@
-package boot.security.browser.authentication;
+package boot.security.core.authentication;
 
 import boot.security.core.properties.LoginType;
 import boot.security.core.properties.SecurityProperties;
