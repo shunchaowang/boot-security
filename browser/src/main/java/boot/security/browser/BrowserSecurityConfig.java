@@ -1,9 +1,6 @@
 package boot.security.browser;
 
 import boot.security.core.properties.SecurityProperties;
-import boot.security.core.validation.ValidationCodeFilter;
-import boot.security.core.validation.ValidationCodeProcessor;
-import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +11,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -27,7 +23,7 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Autowired private UserDetailsService myUserDetailsService;
 
-  @Autowired private Map<String, ValidationCodeProcessor> validationCodeProcessors;
+  @Autowired private ValidationCodeSecurityConfig validationCodeSecurityConfig;
 
   @Bean
   public PasswordEncoder passwordEncoder() {
@@ -55,13 +51,15 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
 
-    ValidationCodeFilter validationCodeFilter = new ValidationCodeFilter();
-    validationCodeFilter.setAuthenticationFailureHandler(bootAuthenticationFailureHandler);
-    validationCodeFilter.setSecurityProperties(securityProperties);
-    validationCodeFilter.setValidationCodeProcessors(validationCodeProcessors);
-    validationCodeFilter.afterPropertiesSet();
-
-    http.addFilterBefore(validationCodeFilter, UsernamePasswordAuthenticationFilter.class)
+    //    ValidationCodeFilter validationCodeFilter = new ValidationCodeFilter();
+    //    validationCodeFilter.setAuthenticationFailureHandler(bootAuthenticationFailureHandler);
+    //    validationCodeFilter.setSecurityProperties(securityProperties);
+    //    validationCodeFilter.setValidationCodeProcessors(validationCodeProcessors);
+    //    validationCodeFilter.afterPropertiesSet();
+    //
+    //    http.addFilterBefore(validationCodeFilter, UsernamePasswordAuthenticationFilter.class)
+    http.apply(validationCodeSecurityConfig)
+        .and()
         .formLogin()
         .loginPage("/authentication/require")
         .loginProcessingUrl("/authentication/form")
@@ -75,9 +73,7 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
         .and()
         .authorizeRequests()
         .antMatchers(
-            "/authentication/require",
-            "/code/*",
-            securityProperties.getBrowser().getLoginPage())
+            "/authentication/require", "/code/*", securityProperties.getBrowser().getLoginPage())
         .permitAll()
         .anyRequest()
         .authenticated()
