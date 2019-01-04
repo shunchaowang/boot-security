@@ -6,7 +6,8 @@ import java.time.LocalDateTime;
 
 public class ImageCode extends ValidationCode {
 
-  private BufferedImage image;
+  // image is not needed to be serialized
+  private transient BufferedImage image;
 
   public ImageCode(BufferedImage image, String code, LocalDateTime expirationTime) {
     super(code, expirationTime);
