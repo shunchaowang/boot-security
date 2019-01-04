@@ -33,7 +33,7 @@ public abstract class AbstractValidationCodeProcessor<C extends ValidationCode>
     String sessionKey = getSessionKey();
 
     HttpSession session = request.getRequest().getSession();
-    C codeInSession = (C) session.getAttribute(sessionKey);
+    ValidationCode codeInSession = (ValidationCode) session.getAttribute(sessionKey);
 
     //    ServletWebRequest webRequest = new ServletWebRequest(request);
     String codeInRequest;
@@ -79,7 +79,12 @@ public abstract class AbstractValidationCodeProcessor<C extends ValidationCode>
 
   private void save(ServletWebRequest request, C validationCode) {
     HttpSession session = request.getRequest().getSession();
-    session.setAttribute(getSessionKey(), validationCode);
+    // Image is not needed to stored,
+    // so we create another ValidationCode which can be serializable
+    ValidationCode code =
+        new ValidationCode(validationCode.getCode(), validationCode.getExpirationTime());
+
+    session.setAttribute(getSessionKey(), code);
   }
 
   private String getSessionKey() {

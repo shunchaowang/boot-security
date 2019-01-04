@@ -1,9 +1,11 @@
 package boot.security.core.validation;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class ValidationCode {
+public class ValidationCode implements Serializable {
 
+  private static final long serialVersionUID = 1L;
   private String code;
 
   private LocalDateTime expirationTime;

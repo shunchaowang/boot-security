@@ -2,12 +2,9 @@ package boot.security.core.validation.image;
 
 import boot.security.core.validation.ValidationCode;
 import java.awt.image.BufferedImage;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class ImageCode extends ValidationCode implements Serializable {
-
-  private static final long serialVersionUID = 1L;
+public class ImageCode extends ValidationCode {
 
   private BufferedImage image;
 
