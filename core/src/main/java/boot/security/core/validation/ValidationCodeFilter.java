@@ -1,5 +1,6 @@
 package boot.security.core.validation;
 
+import boot.security.core.properties.SecurityConstants;
 import boot.security.core.properties.SecurityProperties;
 import java.io.IOException;
 import java.util.HashMap;
@@ -52,7 +53,7 @@ public class ValidationCodeFilter extends OncePerRequestFilter implements Initia
     super.afterPropertiesSet();
 
     // image code validation is required on login
-    urlMap.put("/authentication/form", ValidationCodeType.IMAGE);
+    urlMap.put(SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_FORM, ValidationCodeType.IMAGE);
     addUrlToMap(securityProperties.getValidation().getImage().getUrl(), ValidationCodeType.IMAGE);
 
     addUrlToMap(securityProperties.getValidation().getSms().getUrl(), ValidationCodeType.SMS);

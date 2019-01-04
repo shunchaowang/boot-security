@@ -2,7 +2,9 @@ package boot.security.core.properties;
 
 public class BrowserProperties {
 
-  private String loginPage = "/boot-login.html";
+  private SessionProperties session = new SessionProperties();
+
+  private String loginPage = SecurityConstants.DEFAULT_LOGIN_PAGE_URL;
 
   private LoginType loginType = LoginType.JSON;
 
@@ -14,6 +16,14 @@ public class BrowserProperties {
 
   public void setRememberMeTokenSeconds(int rememberMeTokenSeconds) {
     this.rememberMeTokenSeconds = rememberMeTokenSeconds;
+  }
+
+  public SessionProperties getSession() {
+    return session;
+  }
+
+  public void setSession(SessionProperties session) {
+    this.session = session;
   }
 
   public String getLoginPage() {

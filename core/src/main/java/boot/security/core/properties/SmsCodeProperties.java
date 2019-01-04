@@ -6,7 +6,7 @@ public class SmsCodeProperties {
 
   private int expiredIn = 60;
 
-  private String url = "";
+  private String url;
 
   public int getLength() {
     return length;

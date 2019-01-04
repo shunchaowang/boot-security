@@ -1,12 +1,12 @@
 package boot.security.browser;
 
 import boot.security.browser.session.BootExpiredSessionStrategy;
+import boot.security.core.properties.SecurityConstants;
 import boot.security.core.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,7 +14,7 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
-public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
+public class BrowserSecurityConfig extends AbstractBrowserSecurityConfig {
 
   @Autowired private SecurityProperties securityProperties;
 
@@ -52,20 +52,9 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
 
-    //    ValidationCodeFilter validationCodeFilter = new ValidationCodeFilter();
-    //    validationCodeFilter.setAuthenticationFailureHandler(bootAuthenticationFailureHandler);
-    //    validationCodeFilter.setSecurityProperties(securityProperties);
-    //    validationCodeFilter.setValidationCodeProcessors(validationCodeProcessors);
-    //    validationCodeFilter.afterPropertiesSet();
-    //
-    //    http.addFilterBefore(validationCodeFilter, UsernamePasswordAuthenticationFilter.class)
+    applyPasswordAuthenticationConfig(http);
+
     http.apply(validationCodeSecurityConfig)
-        .and()
-        .formLogin()
-        .loginPage("/authentication/require")
-        .loginProcessingUrl("/authentication/form")
-        .successHandler(bootAuthenticationSuccessHandler)
-        .failureHandler(bootAuthenticationFailureHandler)
         .and()
         .rememberMe()
         .userDetailsService(myUserDetailsService)
@@ -73,17 +62,19 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
         //        .tokenValiditySeconds(securityProperties.getBrowser().getRememberMeTokenSeconds())
         .and()
         .sessionManagement()
-        .invalidSessionUrl("/session/invalid")
-        .maximumSessions(1)
-        .maxSessionsPreventsLogin(true)
+        .invalidSessionUrl(SecurityConstants.DEFAULT_SESSION_INVALID_URL)
+        .maximumSessions(securityProperties.getBrowser().getSession().getMaximumSessions())
+        .maxSessionsPreventsLogin(
+            securityProperties.getBrowser().getSession().isMaxSessionsPreventsLogin())
         .expiredSessionStrategy(new BootExpiredSessionStrategy())
         .and()
         .and()
         .authorizeRequests()
         .antMatchers(
-            "/authentication/require", "/code/*",
+            SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,
+            SecurityConstants.DEFAULT_VALIDATION_CODE_URL_PREFIX + "/*",
             securityProperties.getBrowser().getLoginPage(),
-            "/session/invalid")
+            securityProperties.getBrowser().getSession().getSessionInvalidUrl())
         .permitAll()
         .anyRequest()
         .authenticated()

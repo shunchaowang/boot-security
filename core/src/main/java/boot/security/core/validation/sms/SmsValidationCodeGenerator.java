@@ -11,8 +11,7 @@ import org.springframework.web.context.request.ServletWebRequest;
 @Component("smsValidationCodeGenerator")
 public class SmsValidationCodeGenerator implements ValidationCodeGenerator<ValidationCode> {
 
-  @Autowired
-  private SecurityProperties securityProperties;
+  @Autowired private SecurityProperties securityProperties;
 
   @Override
   public ValidationCode generate(ServletWebRequest request) {

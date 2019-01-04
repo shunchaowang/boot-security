@@ -7,8 +7,7 @@ import org.springframework.security.web.session.SessionInformationExpiredStrateg
 public class BootExpiredSessionStrategy implements SessionInformationExpiredStrategy {
 
   @Override
-  public void onExpiredSessionDetected(SessionInformationExpiredEvent event)
-      throws IOException {
+  public void onExpiredSessionDetected(SessionInformationExpiredEvent event) throws IOException {
 
     event.getResponse().setContentType("application/json;charset=UTF-8");
     event.getResponse().getWriter().write("Concurrent 登录 Session");

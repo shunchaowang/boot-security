@@ -15,8 +15,7 @@ import org.springframework.web.context.request.ServletWebRequest;
 @Component("imageValidationCodeGenerator")
 public class ImageValidationCodeGenerator implements ValidationCodeGenerator<ImageCode> {
 
-  @Autowired
-  private SecurityProperties securityProperties;
+  @Autowired private SecurityProperties securityProperties;
 
   @Override
   public ImageCode generate(ServletWebRequest request) {
@@ -24,10 +23,14 @@ public class ImageValidationCodeGenerator implements ValidationCodeGenerator<Ima
 
     int width =
         ServletRequestUtils.getIntParameter(
-            request.getRequest(), "width", securityProperties.getValidation().getImage().getWidth());
+            request.getRequest(),
+            "width",
+            securityProperties.getValidation().getImage().getWidth());
     int height =
         ServletRequestUtils.getIntParameter(
-            request.getRequest(), "height", securityProperties.getValidation().getImage().getHeight());
+            request.getRequest(),
+            "height",
+            securityProperties.getValidation().getImage().getHeight());
 
     int xx = 15, fontHeight = 35, yy = 30;
 
