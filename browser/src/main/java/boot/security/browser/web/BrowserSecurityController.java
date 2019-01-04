@@ -58,4 +58,10 @@ public class BrowserSecurityController {
     }
     return new SimpleResponse<>("Authentication required, please redirect to login page.");
   }
+
+  @GetMapping("/session/invalid")
+  @ResponseStatus(code = HttpStatus.UNAUTHORIZED)
+  public SimpleResponse<String> sessionInvalid() {
+    return new SimpleResponse<>("Session Invalid");
+  }
 }

@@ -1,5 +1,6 @@
 package boot.security.browser;
 
+import boot.security.browser.session.BootExpiredSessionStrategy;
 import boot.security.core.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -71,9 +72,18 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
         //        .tokenRepository(persistentTokenRepository())
         //        .tokenValiditySeconds(securityProperties.getBrowser().getRememberMeTokenSeconds())
         .and()
+        .sessionManagement()
+        .invalidSessionUrl("/session/invalid")
+        .maximumSessions(1)
+        .maxSessionsPreventsLogin(true)
+        .expiredSessionStrategy(new BootExpiredSessionStrategy())
+        .and()
+        .and()
         .authorizeRequests()
         .antMatchers(
-            "/authentication/require", "/code/*", securityProperties.getBrowser().getLoginPage())
+            "/authentication/require", "/code/*",
+            securityProperties.getBrowser().getLoginPage(),
+            "/session/invalid")
         .permitAll()
         .anyRequest()
         .authenticated()
