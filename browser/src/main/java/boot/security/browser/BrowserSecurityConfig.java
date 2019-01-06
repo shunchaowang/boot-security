@@ -10,17 +10,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 public class BrowserSecurityConfig extends AbstractBrowserSecurityConfig {
 
   @Autowired private SecurityProperties securityProperties;
-
-  @Autowired private AuthenticationSuccessHandler bootAuthenticationSuccessHandler;
-
-  @Autowired private AuthenticationFailureHandler bootAuthenticationFailureHandler;
 
   @Autowired private UserDetailsService myUserDetailsService;
 
