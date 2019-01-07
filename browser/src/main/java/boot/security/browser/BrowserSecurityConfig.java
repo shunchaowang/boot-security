@@ -1,6 +1,5 @@
 package boot.security.browser;
 
-import boot.security.browser.session.BootExpiredSessionStrategy;
 import boot.security.core.properties.SecurityConstants;
 import boot.security.core.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.session.InvalidSessionStrategy;
+import org.springframework.security.web.session.SessionInformationExpiredStrategy;
 
 @Configuration
 public class BrowserSecurityConfig extends AbstractBrowserSecurityConfig {
@@ -19,6 +20,10 @@ public class BrowserSecurityConfig extends AbstractBrowserSecurityConfig {
   @Autowired private UserDetailsService myUserDetailsService;
 
   @Autowired private ValidationCodeSecurityConfig validationCodeSecurityConfig;
+
+  @Autowired private SessionInformationExpiredStrategy sessionInformationExpiredStrategy;
+
+  @Autowired private InvalidSessionStrategy invalidSessionStrategy;
 
   @Bean
   public PasswordEncoder passwordEncoder() {
@@ -56,11 +61,11 @@ public class BrowserSecurityConfig extends AbstractBrowserSecurityConfig {
         //        .tokenValiditySeconds(securityProperties.getBrowser().getRememberMeTokenSeconds())
         .and()
         .sessionManagement()
-        .invalidSessionUrl(SecurityConstants.DEFAULT_SESSION_INVALID_URL)
+        .invalidSessionStrategy(invalidSessionStrategy)
         .maximumSessions(securityProperties.getBrowser().getSession().getMaximumSessions())
         .maxSessionsPreventsLogin(
             securityProperties.getBrowser().getSession().isMaxSessionsPreventsLogin())
-        .expiredSessionStrategy(new BootExpiredSessionStrategy())
+        .expiredSessionStrategy(sessionInformationExpiredStrategy)
         .and()
         .and()
         .authorizeRequests()
