@@ -36,12 +36,12 @@ public class BrowserSecurityConfig extends AbstractBrowserSecurityConfig {
     return new BCryptPasswordEncoder();
   }
 
-  //  public PersistentTokenRepository persistentTokenRepository() {
-  //    JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
-  ////    tokenRepository.setCreateTableOnStartup(true);
-  //
-  //    return tokenRepository;
-  //  }
+//  public PersistentTokenRepository persistentTokenRepository() {
+//    JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
+//    tokenRepository.setCreateTableOnStartup(true);
+//
+//    return tokenRepository;
+//  }
   /**
    * Override this method to configure the {@link HttpSecurity}. Typically subclasses should not
    * invoke this method by calling super as it may override their configuration. The default
@@ -73,8 +73,8 @@ public class BrowserSecurityConfig extends AbstractBrowserSecurityConfig {
         .and()
         .rememberMe()
         .userDetailsService(myUserDetailsService)
-        //        .tokenRepository(persistentTokenRepository())
-        //        .tokenValiditySeconds(securityProperties.getBrowser().getRememberMeTokenSeconds())
+//        .tokenRepository(persistentTokenRepository())
+        .tokenValiditySeconds(securityProperties.getBrowser().getRememberMeTokenSeconds())
         .and()
         .sessionManagement()
         .invalidSessionStrategy(invalidSessionStrategy)
