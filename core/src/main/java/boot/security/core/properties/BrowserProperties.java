@@ -6,9 +6,19 @@ public class BrowserProperties {
 
   private String loginPage = SecurityConstants.DEFAULT_LOGIN_PAGE_URL;
 
+  private String logoutPageUrl;
+
   private LoginType loginType = LoginType.JSON;
 
   private int rememberMeTokenSeconds = 3600;
+
+  public String getLogoutPageUrl() {
+    return logoutPageUrl;
+  }
+
+  public void setLogoutPageUrl(String logoutPageUrl) {
+    this.logoutPageUrl = logoutPageUrl;
+  }
 
   public int getRememberMeTokenSeconds() {
     return rememberMeTokenSeconds;
