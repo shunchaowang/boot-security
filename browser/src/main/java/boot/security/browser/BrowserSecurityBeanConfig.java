@@ -1,8 +1,8 @@
 package boot.security.browser;
 
-import boot.security.browser.logout.BootLogoutSuccessHandler;
-import boot.security.browser.session.BootExpiredSessionStrategy;
-import boot.security.browser.session.BootInvalidSessionStrategy;
+import boot.security.browser.logout.BrowserLogoutSuccessHandler;
+import boot.security.browser.session.BrowserExpiredSessionStrategy;
+import boot.security.browser.session.BrowserInvalidSessionStrategy;
 import boot.security.core.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -20,20 +20,20 @@ public class BrowserSecurityBeanConfig {
   @Bean
   @ConditionalOnMissingBean(SessionInformationExpiredStrategy.class)
   public SessionInformationExpiredStrategy sessionInformationExpiredStrategy() {
-    return new BootExpiredSessionStrategy(
+    return new BrowserExpiredSessionStrategy(
         securityProperties.getBrowser().getSession().getSessionInvalidUrl());
   }
 
   @Bean
   @ConditionalOnMissingBean(InvalidSessionStrategy.class)
   public InvalidSessionStrategy invalidSessionStrategy() {
-    return new BootInvalidSessionStrategy(
+    return new BrowserInvalidSessionStrategy(
         securityProperties.getBrowser().getSession().getSessionInvalidUrl());
   }
 
   @Bean
   @ConditionalOnMissingBean(LogoutSuccessHandler.class)
   public LogoutSuccessHandler logoutSuccessHandler() {
-    return new BootLogoutSuccessHandler(securityProperties.getBrowser().getLogoutPageUrl());
+    return new BrowserLogoutSuccessHandler(securityProperties.getBrowser().getLogoutPageUrl());
   }
 }

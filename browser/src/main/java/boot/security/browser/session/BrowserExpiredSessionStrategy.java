@@ -4,11 +4,11 @@ import java.io.IOException;
 import org.springframework.security.web.session.SessionInformationExpiredEvent;
 import org.springframework.security.web.session.SessionInformationExpiredStrategy;
 
-public class BootExpiredSessionStrategy extends AbstractSessionStrategy
+public class BrowserExpiredSessionStrategy extends AbstractSessionStrategy
     implements SessionInformationExpiredStrategy {
 
   /** Must check if the url is valid before redirection. */
-  public BootExpiredSessionStrategy(String invalidSessionUrl) {
+  public BrowserExpiredSessionStrategy(String invalidSessionUrl) {
     super(invalidSessionUrl);
   }
 

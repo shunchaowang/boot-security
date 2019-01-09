@@ -1,8 +1,8 @@
 package boot.security.browser.authentication;
 
-import boot.security.core.support.SimpleResponse;
 import boot.security.core.properties.LoginType;
 import boot.security.core.properties.SecurityProperties;
+import boot.security.core.support.SimpleResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -16,8 +16,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 
-@Component("bootAuthenticationFailureHandler ")
-public class BootAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
+@Component("authenticationnticationFailureHandler ")
+public class BrowserAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
   private final Logger logger = LoggerFactory.getLogger(getClass());
 

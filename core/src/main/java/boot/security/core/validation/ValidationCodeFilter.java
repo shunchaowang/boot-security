@@ -15,22 +15,25 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+@Component("validationCodeFilter")
 public class ValidationCodeFilter extends OncePerRequestFilter implements InitializingBean {
 
   private final Logger logger = LoggerFactory.getLogger(getClass());
 
-  private AuthenticationFailureHandler authenticationFailureHandler;
+  @Autowired private AuthenticationFailureHandler authenticationFailureHandler;
 
-  private SecurityProperties securityProperties;
+  @Autowired private SecurityProperties securityProperties;
 
   private AntPathMatcher pathMatcher = new AntPathMatcher();
 
-  private Map<String, ValidationCodeProcessor> validationCodeProcessors;
+  @Autowired private Map<String, ValidationCodeProcessor> validationCodeProcessors;
 
   /**
    * we will store all urls into the map, used to check all post url to match.
@@ -88,20 +91,6 @@ public class ValidationCodeFilter extends OncePerRequestFilter implements Initia
     }
 
     filterChain.doFilter(request, response);
-  }
-
-  public void setAuthenticationFailureHandler(
-      AuthenticationFailureHandler authenticationFailureHandler) {
-    this.authenticationFailureHandler = authenticationFailureHandler;
-  }
-
-  public void setSecurityProperties(SecurityProperties securityProperties) {
-    this.securityProperties = securityProperties;
-  }
-
-  public void setValidationCodeProcessors(
-      Map<String, ValidationCodeProcessor> validationCodeProcessors) {
-    this.validationCodeProcessors = validationCodeProcessors;
   }
 
   private void addUrlToMap(String urlString, ValidationCodeType type) {

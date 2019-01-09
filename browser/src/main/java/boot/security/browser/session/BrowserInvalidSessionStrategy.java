@@ -6,10 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.web.session.InvalidSessionStrategy;
 
-public class BootInvalidSessionStrategy extends AbstractSessionStrategy
+public class BrowserInvalidSessionStrategy extends AbstractSessionStrategy
     implements InvalidSessionStrategy {
 
-  public BootInvalidSessionStrategy(String invalidSessionUrl) {
+  public BrowserInvalidSessionStrategy(String invalidSessionUrl) {
     super(invalidSessionUrl);
   }
 

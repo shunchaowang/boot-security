@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
-public class BootLogoutSuccessHandler implements LogoutSuccessHandler {
+public class BrowserLogoutSuccessHandler implements LogoutSuccessHandler {
 
   private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -20,7 +20,7 @@ public class BootLogoutSuccessHandler implements LogoutSuccessHandler {
 
   private ObjectMapper objectMapper = new ObjectMapper();
 
-  public BootLogoutSuccessHandler(String logoutUrl) {
+  public BrowserLogoutSuccessHandler(String logoutUrl) {
     this.logoutUrl = logoutUrl;
   }
 

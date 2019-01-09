@@ -9,15 +9,15 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 
 public class AbstractBrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 
-  @Autowired protected AuthenticationSuccessHandler bootAuthenticationSuccessHandler;
+  @Autowired protected AuthenticationSuccessHandler authenticationSuccessHandler;
 
-  @Autowired protected AuthenticationFailureHandler bootAuthenticationFailureHandler;
+  @Autowired protected AuthenticationFailureHandler authenticationFailureHandler;
 
   protected void applyPasswordAuthenticationConfig(HttpSecurity http) throws Exception {
     http.formLogin()
         .loginPage(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL)
         .loginProcessingUrl(SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_FORM)
-        .successHandler(bootAuthenticationSuccessHandler)
-        .failureHandler(bootAuthenticationFailureHandler);
+        .successHandler(authenticationSuccessHandler)
+        .failureHandler(authenticationFailureHandler);
   }
 }

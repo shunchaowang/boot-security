@@ -14,8 +14,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
-@Component("bootAuthenticationSuccessHandler")
-public class BootAuthenticationSuccessHandler
+@Component("authenticationSuccessHandler")
+public class BrowserAuthenticationSuccessHandler
     extends SavedRequestAwareAuthenticationSuccessHandler {
 
   private final Logger logger = LoggerFactory.getLogger(getClass());

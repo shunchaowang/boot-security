@@ -1,7 +1,7 @@
 package boot.security.browser.web;
 
-import boot.security.core.support.SimpleResponse;
 import boot.security.core.properties.SecurityProperties;
+import boot.security.core.support.SimpleResponse;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
