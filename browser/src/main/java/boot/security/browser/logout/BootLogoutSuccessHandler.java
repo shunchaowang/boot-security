@@ -1,6 +1,6 @@
 package boot.security.browser.logout;
 
-import boot.security.browser.support.SimpleResponse;
+import boot.security.core.support.SimpleResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import javax.servlet.ServletException;
