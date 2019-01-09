@@ -27,7 +27,6 @@ dependencies {
     implementation('org.springframework.session:spring-session-data-redis')
 //    implementation('org.springframework.session:spring-session-jdbc')
 
-//    implementation('org.springframework.session:spring-session-data-redis')
     // For compiling against this library use apiElements
 //    apiElements 'org.springframework.boot:spring-boot-starter-web'
 
@@ -36,12 +35,4 @@ dependencies {
     implementation('commons-beanutils:commons-beanutils:1.9.3')
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
-    // Spring Session cannot get BufferedImage Serialized, disable temporarily
-//    implementation('org.springframework.session:spring-session:1.3.4.RELEASE')
-
 }
-//
-//bootJar {
-//    mainClassName = 'boot.security.browser.DemoApplication'
-//}

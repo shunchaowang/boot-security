@@ -8,20 +8,21 @@
 
 plugins {
     // Apply the java plugin to add support for Java
-    id 'java'
-    id 'org.springframework.boot' version '2.1.1.RELEASE'
+    id 'java-library'
+    id 'org.springframework.boot' version '2.1.1.RELEASE' apply false
     id "io.spring.dependency-management" version '1.0.6.RELEASE'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+    }
 }
 
 dependencies {
 
     implementation project(':core')
     // This dependency is found on compile classpath of this component and consumers.
-    implementation 'com.google.guava:guava:26.0-jre'
+//    implementation 'com.google.guava:guava:26.0-jre'
 
-}
-
-// Define the main class for the application
-bootJar {
-    mainClassName = 'boot.security.app.App'
 }
