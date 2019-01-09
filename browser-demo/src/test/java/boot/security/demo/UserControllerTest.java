@@ -1,4 +1,4 @@
-package boot.security.web.demo;
+package boot.security.demo;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

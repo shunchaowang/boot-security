@@ -9,4 +9,4 @@
 
 rootProject.name = 'boot-security'
 
-include 'core', 'app', 'browser', 'web-demo'
+include 'core', 'app', 'browser', 'browser-demo'

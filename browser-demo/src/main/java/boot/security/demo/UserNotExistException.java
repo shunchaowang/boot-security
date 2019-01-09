@@ -1,4 +1,4 @@
-package boot.security.web.demo;
+package boot.security.demo;
 
 public class UserNotExistException extends RuntimeException {
 

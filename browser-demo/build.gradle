@@ -50,5 +50,5 @@ dependencies {
 
 // Define the main class for the application
 bootJar {
-    mainClassName = 'boot.security..web.demo.WebDemoApplication'
+    mainClassName = 'boot.security.demo.DemoApplication'
 }

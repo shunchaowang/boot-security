@@ -5,6 +5,4 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 
 @Configuration
 @EnableAuthorizationServer
-public class BootAuthorizationServerConfig {
-
-}
+public class BootAuthorizationServerConfig {}

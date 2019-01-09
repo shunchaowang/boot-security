@@ -1,4 +1,4 @@
-package boot.security.web.demo.web.async;
+package boot.security.demo.web.async;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ForkJoinPool;

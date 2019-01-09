@@ -1,4 +1,4 @@
-package boot.security.web.demo.model;
+package boot.security.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import java.util.Date;

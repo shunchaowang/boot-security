@@ -1,6 +1,6 @@
-package boot.security.web.demo.web;
+package boot.security.demo.web;
 
-import boot.security.web.demo.UserNotExistException;
+import boot.security.demo.UserNotExistException;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.http.HttpStatus;

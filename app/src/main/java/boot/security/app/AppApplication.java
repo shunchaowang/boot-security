@@ -6,7 +6,7 @@ package boot.security.app;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-//@Import(CoreApplication.class)
+// @Import(CoreApplication.class)
 public class AppApplication {
   public static void main(String[] args) {
     System.out.println(new AppApplication().getGreeting());
