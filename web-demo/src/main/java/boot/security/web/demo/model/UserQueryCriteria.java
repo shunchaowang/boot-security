@@ -1,4 +1,4 @@
-package boot.security.demo.model;
+package boot.security.web.demo.model;
 
 public class UserQueryCriteria {
 

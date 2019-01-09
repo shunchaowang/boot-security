@@ -1,4 +1,4 @@
-package boot.security.demo.config;
+package boot.security.web.demo.config;
 
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;

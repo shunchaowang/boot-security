@@ -1,4 +1,4 @@
-package boot.security.demo.validation;
+package boot.security.web.demo.validation;
 
 import boot.security.core.validation.ValidationCodeGenerator;
 import boot.security.core.validation.image.ImageCode;

@@ -16,16 +16,17 @@ plugins {
 dependencyManagement {
     imports {
         mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
     }
 }
 
 dependencies {
 
-    implementation project(':core')
+//    implementation project(':core')
     // This dependency is found on compile classpath of this component and consumers.
 //    implementation 'com.google.guava:guava:26.0-jre'
 
     implementation('org.springframework.boot:spring-boot-starter-web')
-//    implementation('org.springframework.security.oauth:spring-security-oauth2:2.3.4.RELEASE')
+    implementation 'org.springframework.cloud:spring-cloud-starter-oauth2'
 
 }

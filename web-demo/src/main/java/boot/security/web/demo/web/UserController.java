@@ -1,7 +1,7 @@
-package boot.security.demo.web;
+package boot.security.web.demo.web;
 
-import boot.security.demo.model.User;
-import boot.security.demo.model.UserQueryCriteria;
+import boot.security.web.demo.model.User;
+import boot.security.web.demo.model.UserQueryCriteria;
 import com.fasterxml.jackson.annotation.JsonView;
 import java.util.ArrayList;
 import java.util.List;
