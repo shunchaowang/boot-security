@@ -24,11 +24,6 @@ dependencies {
 
     implementation('org.springframework.boot:spring-boot-starter-web')
     implementation('org.springframework.boot:spring-boot-starter-security')
-    implementation('org.springframework.session:spring-session-data-redis')
-//    implementation('org.springframework.session:spring-session-jdbc')
-
-    // For compiling against this library use apiElements
-//    apiElements 'org.springframework.boot:spring-boot-starter-web'
 
     implementation('org.apache.commons:commons-lang3:3.8.1')
     implementation('org.apache.commons:commons-collections4:4.2')
