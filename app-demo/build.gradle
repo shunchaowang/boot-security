@@ -23,8 +23,7 @@ dependencyManagement {
 
 dependencies {
     implementation project(':core')
-    implementation project(':browser')
-//    implementation project(":app")
+    implementation project(":app")
 
     //compileOnly('org.projectlombok:lombok:1.18.2')
 
@@ -40,7 +39,7 @@ dependencies {
 
     implementation "org.springframework.boot:spring-boot-configuration-processor"
 
-//    implementation 'org.springframework.cloud:spring-cloud-starter-oauth2'
+    implementation 'org.springframework.cloud:spring-cloud-starter-oauth2'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 

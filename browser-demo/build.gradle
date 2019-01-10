@@ -14,17 +14,9 @@ plugins {
     id "io.spring.dependency-management" version '1.0.6.RELEASE'
 }
 
-dependencyManagement {
-    imports {
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-    }
-}
-
-
 dependencies {
     implementation project(':core')
     implementation project(':browser')
-//    implementation project(":app")
 
     //compileOnly('org.projectlombok:lombok:1.18.2')
 
@@ -39,8 +31,6 @@ dependencies {
     implementation('commons-beanutils:commons-beanutils:1.9.3')
 
     implementation "org.springframework.boot:spring-boot-configuration-processor"
-
-//    implementation 'org.springframework.cloud:spring-cloud-starter-oauth2'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
