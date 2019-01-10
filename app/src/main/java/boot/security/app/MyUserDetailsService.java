@@ -1,4 +1,4 @@
-package boot.security.browser;
+package boot.security.app;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;

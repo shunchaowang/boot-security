@@ -3,10 +3,12 @@
  */
 package boot.security.app;
 
+import boot.security.core.CoreApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
-// @Import(CoreApplication.class)
+@Import(CoreApplication.class)
 public class AppApplication {
   public static void main(String[] args) {
     System.out.println(new AppApplication().getGreeting());
