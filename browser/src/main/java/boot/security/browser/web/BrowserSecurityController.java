@@ -10,8 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
@@ -65,16 +63,5 @@ public class BrowserSecurityController {
   @ResponseStatus(code = HttpStatus.UNAUTHORIZED)
   public SimpleResponse<String> sessionInvalid() {
     return new SimpleResponse<>("Session Invalid");
-  }
-
-
-  /**
-   * Get current principal.
-   * @param principal
-   * @return
-   */
-  @GetMapping("/me")
-  public Object getCurrentUser(@AuthenticationPrincipal UserDetails principal) {
-    return principal;
   }
 }
