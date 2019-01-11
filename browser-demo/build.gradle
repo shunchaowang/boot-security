@@ -33,9 +33,9 @@ dependencies {
     implementation('org.springframework.boot:spring-boot-starter-data-redis')
 
     // if security is not required by browser-demo even required by browser, security is not
-    // necessary to be added as a dependency here; unless browser-demo depends on security.
+    // necessary to be added as a dependency here; unless browser-demo depends on security directly.
     // transient dependencies are resolved automatically
-    implementation('org.springframework.boot:spring-boot-starter-security')
+//    implementation('org.springframework.boot:spring-boot-starter-security')
     implementation "org.springframework.boot:spring-boot-configuration-processor"
 
     implementation('org.apache.commons:commons-lang3:3.8.1')
