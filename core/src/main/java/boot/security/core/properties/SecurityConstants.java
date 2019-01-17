@@ -27,4 +27,9 @@ public interface SecurityConstants {
   String DEFAULT_PARAMETER_NAME_MOBILE = "mobile";
   /** session失效默认的跳转地址 */
   String DEFAULT_SESSION_INVALID_URL = "/session/invalid";
+
+  String MYSQL_DRIVER_KEY = "mysql.driver";
+  String MYSQL_URL_KEY = "mysql.url";
+  String MYSQL_USERNAME_KEY = "mysql.username";
+  String MYSQL_PASSWORD_KEY = "mysql.password";
 }
