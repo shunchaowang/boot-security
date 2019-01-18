@@ -22,7 +22,7 @@ public class BrowserSecurityConfig extends AbstractBrowserSecurityConfig {
 
   @Autowired private SecurityProperties securityProperties;
 
-  @Autowired private UserDetailsService myUserDetailsService;
+  @Autowired private UserDetailsService userDetailsService;
 
   @Autowired private ValidationCodeSecurityConfig validationCodeSecurityConfig;
 
@@ -69,7 +69,7 @@ public class BrowserSecurityConfig extends AbstractBrowserSecurityConfig {
     http.apply(validationCodeSecurityConfig)
         .and()
         .rememberMe()
-        .userDetailsService(myUserDetailsService)
+        .userDetailsService(userDetailsService)
         .tokenRepository(persistentTokenRepository())
         .tokenValiditySeconds(securityProperties.getBrowser().getRememberMeTokenSeconds())
         .and()
