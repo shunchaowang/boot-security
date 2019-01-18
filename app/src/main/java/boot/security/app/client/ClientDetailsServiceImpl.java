@@ -3,9 +3,8 @@ package boot.security.app.client;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.ClientRegistrationException;
-import org.springframework.stereotype.Component;
 
-@Component("clientDetailsService")
+//@Component("clientDetailsService")
 public class ClientDetailsServiceImpl implements ClientDetailsService {
 
   /**
