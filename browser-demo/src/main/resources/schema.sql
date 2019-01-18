@@ -1,4 +1,4 @@
-drop table users;
+drop table if exists users;
 create table users
 (
   username varchar(50)  not null primary key,
@@ -6,7 +6,7 @@ create table users
   enabled  boolean      not null
 );
 
-drop table authorities;
+drop table if exists authorities;
 create table authorities
 (
   username  varchar(50) not null,
@@ -15,7 +15,7 @@ create table authorities
 );
 create unique index ix_auth_username on authorities (username, authority);
 
-drop table persistent_logins;
+drop table if exists persistent_logins;
 create table persistent_logins
 (
   username  varchar(50) not null,
