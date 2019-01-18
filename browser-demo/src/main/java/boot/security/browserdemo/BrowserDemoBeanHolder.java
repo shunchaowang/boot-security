@@ -1,6 +1,5 @@
 package boot.security.browserdemo;
 
-import boot.security.core.properties.SecurityConstants;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -18,10 +17,10 @@ public class BrowserDemoBeanHolder {
   @Bean
   public DataSource dataSource() {
     return DataSourceBuilder.create()
-        .driverClassName(env.getProperty(SecurityConstants.MYSQL_DRIVER_KEY))
-        .url(env.getProperty(SecurityConstants.MYSQL_URL_KEY))
-        .username(env.getProperty(SecurityConstants.MYSQL_USERNAME_KEY))
-        .password(env.getProperty(SecurityConstants.MYSQL_PASSWORD_KEY))
+        .driverClassName(env.getProperty(BrowserDemoConstants.MYSQL_DRIVER_KEY))
+        .url(env.getProperty(BrowserDemoConstants.MYSQL_URL_KEY))
+        .username(env.getProperty(BrowserDemoConstants.MYSQL_USERNAME_KEY))
+        .password(env.getProperty(BrowserDemoConstants.MYSQL_PASSWORD_KEY))
         .build();
   }
 }
