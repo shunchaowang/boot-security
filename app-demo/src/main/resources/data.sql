@@ -4,7 +4,7 @@ insert into oauth_client_details
  web_server_redirect_uri, authorities, access_token_validity,
  refresh_token_validity, additional_information, autoapprove)
   value ("client1", "$2a$10$L3cKmG.fiN8V2Tenw2oaDOc.3SlxyncnJwUOqLRS/x1dKOsIk29c2", "all,read,write",
-         "password,authorization_code,refresh_token", "http://client1.com", null, 36000, 36000,
+         "password,authorization_code,refresh_token", "http://client1.com", null, 36000, 360000,
          null,
          true);
 
@@ -14,7 +14,7 @@ insert into oauth_client_details
  refresh_token_validity, additional_information, autoapprove)
   value ("client2", "$2a$10$L3cKmG.fiN8V2Tenw2oaDOc.3SlxyncnJwUOqLRS/x1dKOsIk29c2",
          "all,read,write",
-         "password,authorization_code,refresh_token", "http://client2.com", null, 36000, 36000,
+         "password,authorization_code,refresh_token", "http://client2.com", null, 36000, 360000,
          null,
          false);
 insert into oauth_client_details
@@ -23,6 +23,6 @@ insert into oauth_client_details
  refresh_token_validity, additional_information, autoapprove)
  value ("client3", "$2a$10$L3cKmG.fiN8V2Tenw2oaDOc.3SlxyncnJwUOqLRS/x1dKOsIk29c2",
         "all,read,write",
-        "password,authorization_code,refresh_token", "http://client3.com", null, 36000, 36000,
+        "password,authorization_code,refresh_token", "http://client3.com", null, 36000, 360000,
         null,
         true);
