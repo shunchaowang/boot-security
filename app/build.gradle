@@ -17,6 +17,7 @@ dependencyManagement {
     imports {
         mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
         //mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        // add comments
     }
 }
 
